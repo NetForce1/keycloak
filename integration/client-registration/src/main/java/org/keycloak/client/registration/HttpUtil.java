@@ -36,6 +36,7 @@ import java.io.InputStream;
  * @author <a href="mailto:sthorger@redhat.com">Stian Thorgersen</a>
  */
 class HttpUtil {
+    private static final String CHARSET = ";charset=utf-8";
 
     private HttpClient httpClient;
 
@@ -56,9 +57,9 @@ class HttpUtil {
         try {
             HttpPost request = new HttpPost(getUrl(baseUri, path));
 
-            request.setHeader(HttpHeaders.CONTENT_TYPE, contentType);
+            request.setHeader(HttpHeaders.CONTENT_TYPE, contentType + CHARSET);
             request.setHeader(HttpHeaders.ACCEPT, acceptType);
-            request.setEntity(new StringEntity(content));
+            request.setEntity(new StringEntity(content, "UTF-8"));
 
             addAuth(request);
 
@@ -109,9 +110,9 @@ class HttpUtil {
         try {
             HttpPut request = new HttpPut(getUrl(baseUri, path));
 
-            request.setHeader(HttpHeaders.CONTENT_TYPE, contentType);
+            request.setHeader(HttpHeaders.CONTENT_TYPE, contentType + CHARSET);
             request.setHeader(HttpHeaders.ACCEPT, acceptType);
-            request.setEntity(new StringEntity(content));
+            request.setEntity(new StringEntity(content, "UTF-8"));
 
             addAuth(request);
 
